@@ -1,0 +1,11 @@
+### Get All Analytics
+GET http://localhost:3000/analytics/all
+
+### Get Sales Report
+GET http://localhost:3000/analytics/sales-report
+
+### Get Inventory
+GET http://localhost:3000/inventory/all
+
+### Get Low Stock Items
+GET http://localhost:3000/inventory/low-stock

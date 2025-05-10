@@ -1,0 +1,37 @@
+### Create a Reward
+POST http://localhost:3000/reward/create
+Content-Type: application/json
+
+{
+  "name": "Free Large Drink",
+  "description": "Redeem for a large drink",
+  "pointsCost": 15
+}
+
+### Get All Rewards
+GET http://localhost:3000/reward/all
+
+### Update a Reward
+PUT http://localhost:3000/reward/update/2d4a6d24-4d61-4268-b0e5-f62776fdca37
+Content-Type: application/json
+
+{
+  "name": "Free small Drink",
+  "description": "Redeem for a large drink",
+  "pointsCost": 15
+}
+
+### Delete a Reward
+DELETE http://localhost:3000/reward/delete/2d4a6d24-4d61-4268-b0e5-f62776fdca37
+
+### Get User Points
+GET http://localhost:3000/loyalty/points/48737250-ade8-4549-b134-5a71e630cc2d
+
+### Redeem a Reward
+POST http://localhost:3000/loyalty/redeem
+Content-Type: application/json
+
+{
+  "userId": "48737250-ade8-4549-b134-5a71e630cc2d",
+  "rewardId": "2d4a6d24-4d61-4268-b0e5-f62776fdca37"
+}

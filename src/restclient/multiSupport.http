@@ -1,0 +1,17 @@
+### Convert Currency (USD to EUR)
+POST http://localhost:3000/multiSupport/convert-currency
+Content-Type: application/json
+
+{
+  "amount": 100,
+  "currency": "KES"
+}
+
+### Translate Interface Text
+POST http://localhost:3000/multiSupport/translate
+Content-Type: application/json
+
+{
+  "text": "Welcome to our restaurant!",
+  "language": "fr"
+}

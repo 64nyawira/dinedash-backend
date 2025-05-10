@@ -1,0 +1,42 @@
+### Place Order
+POST http://localhost:3000/order/place
+Content-Type: application/json
+
+{
+  "userId": "cb0509d8-d617-4465-aea6-361d2ec3d8ca",
+  "orderType": "dine-in"
+}
+
+### Cancel Order
+POST http://localhost:3000/order/cancel
+Content-Type: application/json
+
+{
+  "orderId": "order-uuid"
+}
+
+### View Orders for User
+GET http://localhost:3000/order/view/da6f78a4-49b4-4c99-8361-d2407413b554
+
+### View All Orders
+GET http://localhost:3000/order/all
+
+### Mark Order as Completed (Trigger Points and Email)
+POST http://localhost:3000/order/update-status
+Content-Type: application/json
+
+{
+  "orderId": "dc847d13-f00e-42a8-b4b4-36747717ea26",
+  "status": "completed"
+}
+
+### Check User Loyalty Points
+GET http://localhost:3000/loyalty/points/48737250-ade8-4549-b134-5a71e630cc2d
+
+### Calculate total order amount
+POST http://localhost:3000/order/totalAmount
+Content-Type: application/json
+
+{
+  "orderId": "1966debf-e7d0-44b6-83fe-cfca4aafa1ba"
+}

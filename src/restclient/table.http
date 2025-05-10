@@ -1,0 +1,36 @@
+### Create Table
+POST http://localhost:3000/table/create
+Content-Type: application/json
+
+{
+  "name": "Table 12",
+  "capacity": 2,
+  "description": "Corner table with a view",
+  "image": "8-seater-table.webp"
+}
+
+### View All Tables
+GET http://localhost:3000/table/all
+
+### View Available Tables
+GET http://localhost:3000/table/available
+
+### Update Table
+PUT http://localhost:3000/table/update/cb7a8ea8-fc6d-4a54-9674-99080dbfdec7
+Content-Type: application/json
+
+{
+  "capacity": 6
+}
+
+### Delete Table
+DELETE http://localhost:3000/table/delete/table-uuid
+
+### Change Table Status
+POST http://localhost:3000/table/change-status
+Content-Type: application/json
+
+{
+  "tableId": "1d268f34-98ac-4104-a897-d4e40538fac2",
+  "status": "available"
+}

@@ -1,0 +1,157 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String   @id @default(uuid())
+  name             String
+  email            String   @unique
+  password         String
+  role             String   @default("customer") 
+  resetCode        String?   
+  resetCodeExpiry  DateTime? 
+  loyaltyPoints    LoyaltyPoints?
+  redemptions      Redemption[]
+  carts            Cart[]
+  orders           Order[]
+  Reservation      Reservation[]
+  Analytics        Analytics[]
+
+  Payment Payment[]
+}
+
+model Menu {
+  id                String   @id @default(uuid())
+  dishName          String
+  description       String
+  price             Float
+  category          String
+  ingredients       String
+  allergenInfo      String
+  status            String @default("Available")
+  image             String?  // Optional
+  servingTimes      String?  // Optional
+  addOns            String?  // Optional
+  serviceCost       Float    @default(0.0) // ✅ Add default value
+  total             Float    @default(0.0) // ✅ Add default value
+  cartItems         Cart[]
+  orderItems        OrderItem[]
+  Inventory         Inventory[]
+}
+
+
+model Cart {
+  id        String   @id @default(uuid())
+  userId    String
+  menuId    String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  menu      Menu     @relation(fields: [menuId], references: [id])
+}
+
+model Order {
+  id          String      @id @default(uuid())
+  userId      String
+  orderType   String      // 'dine-in', 'take-away', 'delivery'
+  status      String      @default("pending") // 'pending', 'completed', 'cancelled'
+  createdAt   DateTime    @default(now())
+  user        User        @relation(fields: [userId], references: [id])
+  orderItems  OrderItem[]
+
+
+  Analytics Analytics[]
+
+  Payment Payment[]
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  orderId   String
+  menuId    String
+  quantity  Int      @default(1)
+  order     Order    @relation(fields: [orderId], references: [id])
+  menu      Menu     @relation(fields: [menuId], references: [id])
+}
+
+model Table {
+  id           String   @id @default(uuid())
+  name         String   @unique  // e.g., "Table 1"
+  capacity     Int      // Number of people it can seat
+  description  String    // Description or details about the table
+  image        String?   // Optional image showing the table's position
+  status       String    @default("available") // 'available', 'reserved'
+  reservations Reservation[]
+}
+
+model Reservation {
+  id         String   @id @default(uuid())
+  userId     String
+  tableId    String
+  reservationTime DateTime // When the reservation is scheduled
+  status     String    @default("active") // 'active', 'cancelled', 'completed'
+  user       User      @relation(fields: [userId], references: [id])
+  table      Table     @relation(fields: [tableId], references: [id])
+}
+
+model LoyaltyPoints {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  points    Int      @default(0) // Total redeemable points
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Reward {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String
+  pointsCost  Int      // How many points needed to redeem this reward
+  Redemption  Redemption[]
+}
+
+model Redemption {
+  id        String   @id @default(uuid())
+  userId    String
+  rewardId  String
+  redeemedAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  reward    Reward   @relation(fields: [rewardId], references: [id])
+}
+
+model Inventory {
+  id        String  @id @default(uuid())
+  menuId    String  @unique
+  stock     Int     // Number of items in stock
+  threshold Int     // Minimum stock level before a restock is needed
+  updatedAt DateTime @updatedAt
+  menu      Menu    @relation(fields: [menuId], references: [id])
+}
+
+model Analytics {
+  id         String   @id @default(uuid())
+  userId     String?
+  orderId    String?
+  action     String   // 'purchase', 'view', 'cart_add', etc.
+  details    String?  // Additional details (e.g., dish ordered, preferences)
+  createdAt  DateTime @default(now())
+  user       User?    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  order      Order?   @relation(fields: [orderId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Payment {
+  id           String   @id @default(uuid())
+  userId       String
+  orderId      String
+  amount       Float
+  transactionId String  @unique
+  status       String   @default("pending") // 'pending', 'completed', 'failed'
+  createdAt    DateTime @default(now())
+
+   user         User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  order        Order    @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}

@@ -1,0 +1,29 @@
+### Add to Cart
+POST http://localhost:3000/cart/add
+Content-Type: application/json
+
+{
+  "userId": "cb0509d8-d617-4465-aea6-361d2ec3d8ca",
+  "menuId": "9a2fff3e-7bfd-4630-b8f0-a82fd27ef74f",
+  "quantity": 6
+}
+
+### Remove from Cart
+POST http://localhost:3000/cart/remove
+Content-Type: application/json
+
+{
+  "userId": "user-uuid",
+  "menuId": "menu-uuid"
+}
+
+### View Cart
+GET http://localhost:3000/cart/view/48737250-ade8-4549-b134-5a71e630cc2d
+
+### Clear Cart
+POST http://localhost:3000/cart/clear
+Content-Type: application/json
+
+{
+  "userId": "user-uuid"
+}

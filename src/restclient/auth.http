@@ -1,0 +1,72 @@
+### Register User
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "name": " Charity Irungu",
+  "email": "charityirungu16@gmail.com",
+  "password": "charityirungu"
+}
+
+### Login User
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "charitynyawirairungu@gmail.com",
+  "password": "charity1234"
+}
+
+### Forgot Password
+POST http://localhost:3000/auth/forgot-password
+Content-Type: application/json
+
+{
+  "email": "eb1.56075.21@student.chuka.ac.ke"
+}
+
+### Verify Reset Code
+POST http://localhost:3000/auth/verify-reset-code
+Content-Type: application/json
+
+{
+  "email": "eb1.56075.21@student.chuka.ac.ke",
+  "code": "548158"
+}
+
+### Reset Password
+POST http://localhost:3000/auth/reset-password
+Content-Type: application/json
+
+{
+  "email": "charitynyawirairungu@gmail.com",
+  "newPassword": "charity1234"
+}
+
+### Change User Role (Admin Only)
+POST http://localhost:3000/auth/change-role
+Content-Type: application/json
+
+{
+  "adminId": "48737250-ade8-4549-b134-5a71e630cc2d",
+  "userId": "86d94cd4-4bb8-4722-8a3b-8b05f235394f",
+  "newRole": "client"
+}
+
+### Get All Usersss
+GET http://localhost:3000/auth/users
+
+### Delete a User
+DELETE http://localhost:3000/auth/user
+Content-Type: application/json
+
+{
+  "adminId": "admin-uuid",
+  "userId": "2d2b28db-38db-4e8f-84a0-c0627b1bbafe"
+}
+
+
+
+
+###"email": "eb1.56075.21@student.chuka.ac.ke",
+ ### "password": "eb156075"

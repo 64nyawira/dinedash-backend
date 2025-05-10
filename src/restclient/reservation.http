@@ -1,0 +1,31 @@
+### Make a Reservation
+POST http://localhost:3000/reservation/make
+Content-Type: application/json
+
+{
+  "userId": "cb0509d8-d617-4465-aea6-361d2ec3d8ca",
+  "tableId": "c3a701c3-fb2b-41a9-a143-37d6a9ae698c",
+  "reservationTime": "2025-04-21T18:00:00Z"
+}
+
+
+### View Available Tables
+GET http://localhost:3000/table/available
+
+### Get All Usersss
+GET http://localhost:3000/auth/users
+
+
+### Cancel a Reservation
+POST http://localhost:3000/reservation/cancel
+Content-Type: application/json
+
+{
+  "reservationId": "dd93f1c1-2b57-4605-9051-8f08fb08914a"
+}
+
+### Get User Reservations
+GET http://localhost:3000/reservation/user/2d2b28db-38db-4e8f-84a0-c0627b1bbafe
+
+### Get All Reservations
+GET http://localhost:3000/reservation/all

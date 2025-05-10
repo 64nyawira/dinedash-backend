@@ -1,0 +1,45 @@
+### Initiate M-Pesa Payment
+POST http://localhost:3000/payment/initiate
+Content-Type: application/json
+
+{
+  "userId": "48737250-ade8-4549-b134-5a71e630cc2d",
+  "orderId": "1966debf-e7d0-44b6-83fe-cfca4aafa1ba",
+  "phoneNumber": "2540113397560",
+  "amount": 5
+}
+
+### Simulate M-Pesa Callback
+POST http://localhost:3000/payment/callback
+Content-Type: application/json
+
+{
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "12345",
+      "CheckoutRequestID": "ws_CO_123456789",
+      "ResultCode": 0
+    }
+  }
+}
+
+### Cancel a Payment Transaction
+POST http://localhost:3000/payment/cancel
+Content-Type: application/json
+
+{
+  "transactionId": "ws_CO_123456789",
+  "amount": 500
+}
+
+### Get All Transactions
+GET http://localhost:3000/payment/all
+
+### Get a Receipt for a Specific Transaction
+GET http://localhost:3000/payment/receipt/ws_CO_123456789
+
+
+
+
+
+

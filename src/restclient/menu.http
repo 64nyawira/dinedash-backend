@@ -1,0 +1,63 @@
+### Create Menu Item
+
+POST http://localhost:3000/menu/create
+Content-Type: application/json
+
+{
+  "dishName": "pasta",
+  "description": "Classic Italian pasta with creamy sauce.",
+  "price": 12.99,
+  "category": "Main Course",
+  "ingredients": "Pasta, eggs, parmesan, pancetta, pepper",
+  "allergenInfo": "Contains dairy, eggs",
+  "status": "Available",
+  "image": "menu-image-url.jpg",
+  "servingTimes": "brunch, Dinner",
+  "addOns": "Extra cheese, Bacon",
+  "serviceCost":1.50,
+  "total":15.99
+}
+
+###upload
+POST http://localhost:3000/upload
+
+
+### Change Menu Item Status (Only Managers Can Do This)
+PUT http://localhost:3000/menu/status/cce1e937-805b-4493-ba30-ba8a505eb40a
+Content-Type: application/json
+
+{
+  "userId": "2d2b28db-38db-4e8f-84a0-c0627b1bbafe",   
+  "newStatus": "available"
+}
+
+
+### Get All Menu Items
+
+GET http://localhost:3000/menu/all
+
+
+### Get all users
+GET http://localhost:3000/auth/users
+
+### Get Menu Item by ID
+
+GET http://localhost:3000/menu/getone/032dbdf3-0f9d-4518-9c37-f2cabeb0c7d1
+
+
+
+### Update Menu Item
+
+PUT http://localhost:3000/menu/update/032dbdf3-0f9d-4518-9c37-f2cabeb0c7d1
+Content-Type: application/json
+
+{
+  "price": 14.99,
+  "status": "Out of Stock"
+}
+
+
+
+### Delete Menu Item
+
+DELETE http://localhost:3000/menu/delete/032dbdf3-0f9d-4518-9c37-f2cabeb0c7d1
